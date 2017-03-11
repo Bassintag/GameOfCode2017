@@ -1,26 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Folder : MonoBehaviour {
 
     private bool wasHighlighted;
     public bool highlighted { get; set; }
+    public Image avatar;
 
-	void Start() {
+    void Start() {
         int idx_surname = Random.Range(0, CharacterProvider.instance.surnames.Length - 1);
-        CharacterProvider.Surname surname = CharacterProvider.instance.surnames[idx_surname];
+        string surname = CharacterProvider.instance.surnames[idx_surname];
         int idx_name = Random.Range(0, CharacterProvider.instance.names.Length - 1);
         string name = CharacterProvider.instance.names[idx_name];
 
-        CharacterProvider.Avatar avatar = null;
-        while (avatar == null || avatar.female != surname.female)
-        {
-            int idx_avatar = Random.Range(0, CharacterProvider.instance.avatars.Length - 1);
-            avatar = CharacterProvider.instance.avatars[idx_avatar];
-        }
+        StartCoroutine(createNewFolder(surname, name));
         highlighted = false;
         wasHighlighted = false;
+    }
+
+    IEnumerator createNewFolder(string surname, string name)
+    {
+        WWW www = new WWW("http://api.adorable.io/avatars/285/" + surname + name + ".png");
+        yield return www;
+        avatar.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
+     //   WWW www2 = new WWW("http://www.behindthename.com/random/random.php?number=1&gender=m&surname=&randomsurname=yes&all=no&usage_fairy=1&usage_fntsy=1");
+      //  yield return www2;
+      //  Debug.Log(www2.text);
     }
 
     IEnumerator bringToFront()

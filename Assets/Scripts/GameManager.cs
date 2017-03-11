@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
 	void Update ()
     {
         Vector3 rotation = Camera.main.transform.eulerAngles;
-        print(Mathf.Abs(rotation.y));
+        //(Mathf.Abs(rotation.y));
         if (Mathf.Abs(rotation.y) < 45 || Mathf.Abs(rotation.y) > 315)
         {
             folders[0].highlighted = true;
