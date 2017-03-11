@@ -61,7 +61,7 @@ public class Folder : MonoBehaviour {
             if (!highlighted)
                 break;
             transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 0, i / 100f), 0);
-            transform.position = new Vector3(x, Mathf.Lerp(y, 2.5f, i / 100f), z);
+            transform.position = new Vector3(x, Mathf.Lerp(y, 4.5f, i / 100f), z);
             yield return new WaitForSeconds(.005f);
         }
     }

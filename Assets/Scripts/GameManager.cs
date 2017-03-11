@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
         {
-            Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
-            folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles;
+            Folder folder = Instantiate(prefab, transform.position - new Vector3(0, folders.Count / 100, 0), Quaternion.identity);
+            folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
-        List<Folder> folders = new List<Folder>();
+        folders = new List<Folder>();
         folders.AddRange(createNewFolders(2, 2, 0));
         folders.AddRange(createNewFolders(2, 0, 2));
         for (int i = 0; i < folders.Count; i++)
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour {
     {
         if (folders.Count == 0)
             return;
+        print("update");
         Vector3 rotation = Camera.main.transform.eulerAngles;
         if (Mathf.Abs(rotation.y) < 45 || Mathf.Abs(rotation.y) > 315)
         {
