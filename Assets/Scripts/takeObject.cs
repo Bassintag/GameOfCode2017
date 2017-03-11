@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class takeObject : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class takeObject : MonoBehaviour
     public Sprite oldSprite;
     public Image fill;
     public float timetoTake;
+
+    public UnityEvent onTake;
 
     void OnTriggerEnter(Collider col)
     {
@@ -48,7 +51,6 @@ public class takeObject : MonoBehaviour
     IEnumerator TakeItem()
     {
         yield return new WaitForSeconds(timetoTake);
-        //MAKE ACTION HERE
-        Debug.Log("COROUTINE");
+        onTake.Invoke();
     }
 }
