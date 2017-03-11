@@ -24,11 +24,41 @@ public class Folder : MonoBehaviour {
         wasHighlighted = false;
     }
 
-    void Udpate()
+    IEnumerator bringToFront()
+    {
+        float start = transform.eulerAngles.x;
+        for (int i = 0; i <= 100; i += 4)
+        {
+            if (!highlighted)
+                break;
+            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, -90, i / 100f), 0);
+            yield return new WaitForSeconds(.01f);
+        }
+    }
+
+    IEnumerator bringToBack()
+    {
+        float start = transform.eulerAngles.x;
+        for (int i = 0; i <= 100; i += 4)
+        {
+            if (highlighted)
+                break;
+            transform.eulerAngles = new Vector3(start - Mathf.LerpAngle(0, start, i / 100f), 0);
+            yield return new WaitForSeconds(.01f);
+        }
+    }
+
+    void Update()
     {
         if (wasHighlighted && !highlighted)
         {
-
+            StartCoroutine(bringToBack());
+            wasHighlighted = highlighted;
+        }
+        if (!wasHighlighted && highlighted)
+        {
+            StartCoroutine(bringToFront());
+            wasHighlighted = highlighted;
         }
     }
 }

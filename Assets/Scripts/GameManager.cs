@@ -7,23 +7,25 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public List<Folder> folders;
 
-	void Start ()
+    public Folder folder;
+
+    void Start ()
     {
 		folders = new List<Folder>();
+        folders.Add(folder);
     }
 	
 	void Update ()
     {
         Vector3 rotation = Camera.main.transform.eulerAngles;
-        if (Mathf.Abs(rotation.y) < 45)
+        print(Mathf.Abs(rotation.y));
+        if (Mathf.Abs(rotation.y) < 45 || Mathf.Abs(rotation.y) > 315)
         {
             folders[0].highlighted = true;
-            Debug.Log("in");
         }
         else
         {
             folders[0].highlighted = false;
-            Debug.Log("out");
         }
     }
 }

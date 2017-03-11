@@ -10,7 +10,7 @@ public class CharacterProvider : MonoBehaviour {
 
     public static CharacterProvider instance;
 
-    void Start()
+    void Awake()
     {
         if (instance != null)
             Destroy(this);
