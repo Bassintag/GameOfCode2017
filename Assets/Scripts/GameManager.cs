@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
         while (folders.Count < number_folders)
         {
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
+            folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles;
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)
