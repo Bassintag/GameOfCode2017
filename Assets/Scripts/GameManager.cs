@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
         {
-            Folder folder = Instantiate(prefab);
+            Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)
@@ -37,7 +37,13 @@ public class GameManager : MonoBehaviour {
                     }
                 }
             }
-            // Melanger folder.actions !
+            for (int i = 0; i < folder.actions.Count; i++)
+            {
+                Actions.Action temp = folder.actions[i];
+                int randomIndex = Random.Range(i, folder.actions.Count);
+                folder.actions[i] = folder.actions[randomIndex];
+                folder.actions[randomIndex] = temp;
+            }
             folders.Add(folder);
         }
         return folders;
@@ -48,7 +54,13 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         folders.AddRange(createNewFolders(2, 2, 0));
         folders.AddRange(createNewFolders(2, 0, 2));
-        //Melanger folders !
+        for (int i = 0; i < folders.Count; i++)
+        {
+            Folder temp = folders[i];
+            int randomIndex = Random.Range(i, folders.Count);
+            folders[i] = folders[randomIndex];
+            folders[randomIndex] = temp;
+        }
     }
 	
 	void Update ()
