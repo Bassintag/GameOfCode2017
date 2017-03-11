@@ -31,8 +31,8 @@ public class Folder : MonoBehaviour {
         {
             if (!highlighted)
                 break;
-            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, -90, i / 100f), 0);
-            yield return new WaitForSeconds(.01f);
+            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 0, i / 100f), 0);
+            yield return new WaitForSeconds(.005f);
         }
     }
 
@@ -43,8 +43,8 @@ public class Folder : MonoBehaviour {
         {
             if (highlighted)
                 break;
-            transform.eulerAngles = new Vector3(start - Mathf.LerpAngle(0, start, i / 100f), 0);
-            yield return new WaitForSeconds(.01f);
+            transform.eulerAngles = new Vector3(start - Mathf.LerpAngle(90, start, i / 100f), 0);
+            yield return new WaitForSeconds(.005f);
         }
     }
 
