@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
         {
+            print(prefab);
             Folder folder = Instantiate(prefab, transform.position + new Vector3(0, (this.folders.Count + folders.Count) / 30f, 0), Quaternion.identity);
             folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
             folder.name = "Folder (id: " + (this.folders.Count + folders.Count) + ")";
