@@ -5,8 +5,8 @@ using UnityEngine;
 public class CharacterProvider : MonoBehaviour {
 
     public Avatar[] avatars;
-    public Surname[] names;
-    public string[] surnames;
+    public Surname[] surnames;
+    public string[] names;
 
     public static CharacterProvider instance;
 
