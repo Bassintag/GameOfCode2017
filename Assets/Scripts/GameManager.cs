@@ -101,14 +101,14 @@ public class GameManager : MonoBehaviour {
             {
                 Folder f = folders[0];
                 folders.Remove(f);
-                Destroy(f.gameObject);
+                f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
                 heavenQueue.Add(f);
             }
             else if (gobj.tag == "tray_hell")
             {
                 Folder f = folders[0];
                 folders.Remove(f);
-                Destroy(f.gameObject);
+                f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
                 hellQueue.Add(f);
             }
         }
