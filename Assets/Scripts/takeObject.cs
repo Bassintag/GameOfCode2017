@@ -18,6 +18,8 @@ public class takeObject : MonoBehaviour
 
     public UnityEvent onTake;
 
+    public Collider hovered;
+
     void OnTriggerEnter(Collider col)
     {
         //this.transform.getComponent<UnityEngine.UI.Image>().sprite = newSprite;
@@ -38,6 +40,7 @@ public class takeObject : MonoBehaviour
     {
         fill.fillAmount += 1.0f / timetoTake * Time.deltaTime;
         StartCoroutine("TakeItem");
+        hovered = col;
     }
 
     IEnumerator Unfill()

@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector]
     public List<Folder> folders;
+    [HideInInspector]
+    public List<Folder> heavenQueue;
+    [HideInInspector]
+    public List<Folder> hellQueue;
+
     public Folder prefab;
 
     private List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
@@ -53,6 +58,8 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         folders = new List<Folder>();
+        heavenQueue = new List<Folder>();
+        hellQueue = new List<Folder>();
         folders.AddRange(createNewFolders(5, 3, 0));
         folders.AddRange(createNewFolders(5, 0, 3));
         for (int i = 0; i < folders.Count; i++)
@@ -82,6 +89,28 @@ public class GameManager : MonoBehaviour {
         else
         {
             folders[0].highlighted = false;
+        }
+    }
+
+    public void OnSelectTray(takeObject obj)
+    {
+        GameObject gobj;
+        if (folders.Count > 0 && (gobj = obj.hovered.gameObject) != null)
+        {
+            if (gobj.tag == "tray_heaven")
+            {
+                Folder f = folders[0];
+                folders.Remove(f);
+                f.enabled = false;
+                heavenQueue.Add(f);
+            }
+            else if (gobj.tag == "tray_hell")
+            {
+                Folder f = folders[0];
+                folders.Remove(f);
+                f.enabled = false;
+                hellQueue.Add(f);
+            }
         }
     }
 }
