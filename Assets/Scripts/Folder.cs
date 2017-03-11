@@ -87,19 +87,23 @@ public class Folder : MonoBehaviour {
 
     public void Slide(Vector3 targetPosition, Vector3 targetAngles)
     {
-        StartCoroutine(SlideToPosition(targetPosition, targetAngles));
+        StartCoroutine(SlideToPosition(targetPosition + new Vector3(0, 1f), targetAngles, targetPosition, targetAngles, true));
     }
 
-    IEnumerator SlideToPosition(Vector3 position, Vector3 angles)
+    IEnumerator SlideToPosition(Vector3 position, Vector3 angles, Vector3 nextPosition, Vector3 nextAngles, bool next)
     {
         Vector3 actualPos = transform.position;
         Vector3 actualAngles = transform.eulerAngles;
-        for (float f = 0; f <= 1f; f += 0.01f)
+        for (float f = 0; f <= 1f; f += 0.05f)
         {
             transform.position = Vector3.Lerp(actualPos, position, f);
             transform.eulerAngles = Vector3.Lerp(actualAngles, angles, f);
             yield return new WaitForEndOfFrame();
         }
+        transform.position = position;
+        transform.eulerAngles = angles;
+        if (next)
+            StartCoroutine(SlideToPosition(nextPosition, nextAngles, Vector3.zero, Vector3.zero, false));
     }
 
     void GenerateText()
