@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
             {
                 Folder f = folders[0];
                 folders.Remove(f);
-                f.enabled = false;
+                Destroy(f.gameObject);
                 hellQueue.Add(f);
             }
         }

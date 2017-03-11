@@ -26,6 +26,7 @@ public class takeObject : MonoBehaviour
         //Cross.sprite = newSprite;
         Cross.SetActive(true);
         Cross2.SetActive(false);
+        StartCoroutine("TakeItem");
     }
 
     void OnTriggerExit(Collider col)
@@ -39,7 +40,6 @@ public class takeObject : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
         fill.fillAmount += 1.0f / timetoTake * Time.deltaTime;
-        StartCoroutine("TakeItem");
         hovered = col;
     }
 
