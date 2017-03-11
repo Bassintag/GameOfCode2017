@@ -1,64 +1,17 @@
 fileFormatVersion: 2
-guid: b33bcd4a5aebcfc4c825a20cd00bb903
-timeCreated: 1489250419
+guid: 857ca6e350edb484cab78626a6f24194
+timeCreated: 1489250745
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: default
-    100002: default_MeshPart0
-    100004: default_MeshPart1
-    100006: default_MeshPart2
-    100008: default_MeshPart3
-    100010: default_MeshPart4
-    100012: default_MeshPart5
-    100014: default_MeshPart6
-    100016: default_MeshPart7
-    100018: default_MeshPart8
-    100020: default_MeshPart9
-    100022: //RootNode
+    100002: //RootNode
     400000: default
-    400002: default_MeshPart0
-    400004: default_MeshPart1
-    400006: default_MeshPart2
-    400008: default_MeshPart3
-    400010: default_MeshPart4
-    400012: default_MeshPart5
-    400014: default_MeshPart6
-    400016: default_MeshPart7
-    400018: default_MeshPart8
-    400020: default_MeshPart9
-    400022: //RootNode
-    2300000: default_MeshPart0
-    2300002: default_MeshPart1
-    2300004: default_MeshPart2
-    2300006: default_MeshPart3
-    2300008: default_MeshPart4
-    2300010: default_MeshPart5
-    2300012: default_MeshPart6
-    2300014: default_MeshPart7
-    2300016: default_MeshPart8
-    2300018: default_MeshPart9
-    3300000: default_MeshPart0
-    3300002: default_MeshPart1
-    3300004: default_MeshPart2
-    3300006: default_MeshPart3
-    3300008: default_MeshPart4
-    3300010: default_MeshPart5
-    3300012: default_MeshPart6
-    3300014: default_MeshPart7
-    3300016: default_MeshPart8
-    3300018: default_MeshPart9
-    4300000: default_MeshPart0
-    4300002: default_MeshPart1
-    4300004: default_MeshPart2
-    4300006: default_MeshPart3
-    4300008: default_MeshPart4
-    4300010: default_MeshPart5
-    4300012: default_MeshPart6
-    4300014: default_MeshPart7
-    4300016: default_MeshPart8
-    4300018: default_MeshPart9
+    400002: //RootNode
+    2300000: default
+    3300000: default
+    4300000: default
   materials:
     importMaterials: 1
     materialName: 0
