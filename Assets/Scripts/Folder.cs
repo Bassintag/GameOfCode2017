@@ -11,11 +11,13 @@ public class Folder : MonoBehaviour {
     public Text characterName;
     public Text characterSurname;
     public Text characterActions;
+    public bool finish;
 
-    [HideInInspector]
-    public List<Actions.Action> actions = new List<Actions.Action>();
+    public List<Actions.Action> actions;
 
-    void Start() {
+    void Awake() {
+        finish = false;
+        actions = new List<Actions.Action>();
         StartCoroutine(createNewFolder());
         highlighted = false;
         wasHighlighted = false;
@@ -45,6 +47,7 @@ public class Folder : MonoBehaviour {
         yield return www;
         avatar.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
         GenerateText();
+        finish = true;
     }
 
     IEnumerator bringToFront()
@@ -84,7 +87,7 @@ public class Folder : MonoBehaviour {
         string str = "";
         foreach (Actions.Action a in actions)
         {
-            str += a.text + "\n";
+            str += "- " + a.text + "\n\n";
         }
         characterActions.text = str;
     }
