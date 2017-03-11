@@ -19,19 +19,26 @@ public class Actions : MonoBehaviour {
         actions.Add(new Action(-0.6f, "Ate his hamster"));
         actions.Add(new Action(-0.4f, "Ate the last cupcake"));
         actions.Add(new Action(-0.4f, "Made fun of an overweight person"));
+        actions.Add(new Action(-0.4f, "Goes to jail"));
+        actions.Add(new Action(-0.4f, "Left his family alone"));
         actions.Add(new Action(-0.2f, "Has confused Link and Zelda"));
         actions.Add(new Action(-0.2f, "Didn't help an old lady to cross the road"));
+        actions.Add(new Action(-0.2f, "Pee on the street"));
 
         actions.Add(new Action(1f, "Saved someone's life"));
-        actions.Add(new Action(1f, "a"));
-        actions.Add(new Action(0.8f, "g"));
-        actions.Add(new Action(0.8f, "h"));
-        actions.Add(new Action(0.6f, "j"));
-        actions.Add(new Action(0.6f, "k"));
-        actions.Add(new Action(0.4f, "l"));
-        actions.Add(new Action(0.4f, "m"));
+        actions.Add(new Action(1f, "Arrested a Criminal"));
+        actions.Add(new Action(1f, "Won an Hackaton"));
+        actions.Add(new Action(0.8f, "Stopped playing League of Legends"));
+        actions.Add(new Action(0.8f, "Save Krillin with the Dragon balls"));
+        actions.Add(new Action(0.8f, "Save people from fire"));
+        actions.Add(new Action(0.6f, "Gave money to homeless people"));
+        actions.Add(new Action(0.6f, "Being honnest all of his life"));
+        actions.Add(new Action(0.6f, "Buy ecological things"));
+        actions.Add(new Action(0.4f, "Save a cat stuck in a tree"));
+        actions.Add(new Action(0.4f, "Stop a thief"));
         actions.Add(new Action(0.2f, "Documented his code"));
         actions.Add(new Action(0.2f, "Fed well his goldfish"));
+        actions.Add(new Action(0.2f, "Used public transport"));
         instance = this;
     }
 
