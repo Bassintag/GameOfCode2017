@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         folders = new List<Folder>();
-        folders.AddRange(createNewFolders(2, 2, 0));
-        folders.AddRange(createNewFolders(2, 0, 2));
+        folders.AddRange(createNewFolders(5, 3, 0));
+        folders.AddRange(createNewFolders(5, 0, 3));
         for (int i = 0; i < folders.Count; i++)
         {
             Folder temp = folders[i];
