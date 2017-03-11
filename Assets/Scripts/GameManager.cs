@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour {
     {
 		folders = new List<Folder>();
         folders.Add(folder);
+
+        Actions.Action gentille = Actions.instance.getRandomNiceAction();
+        Actions.Action mechante = Actions.instance.getRandomNaughtyAction();
+        Debug.Log(gentille.text + " (" + gentille.karma + ")");
+        Debug.Log(mechante.text + " (" + mechante.karma + ")");
     }
 	
 	void Update ()
