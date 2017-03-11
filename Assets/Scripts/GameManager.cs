@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
         {
-            Folder folder = Instantiate(prefab);
+            Folder folder = Instantiate(prefab, transform.position + new Vector3(0, (this.folders.Count + folders.Count) / 30f, 0), Quaternion.identity);
+            folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
+            folder.name = "Folder (id: " + (this.folders.Count + folders.Count) + ")";
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)
@@ -37,7 +39,13 @@ public class GameManager : MonoBehaviour {
                     }
                 }
             }
-            // Melanger folder.actions !
+            for (int i = 0; i < folder.actions.Count; i++)
+            {
+                Actions.Action temp = folder.actions[i];
+                int randomIndex = Random.Range(i, folder.actions.Count);
+                folder.actions[i] = folder.actions[randomIndex];
+                folder.actions[randomIndex] = temp;
+            }
             folders.Add(folder);
         }
         return folders;
@@ -45,18 +53,25 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
-        List<Folder> folders = new List<Folder>();
+        folders = new List<Folder>();
         folders.AddRange(createNewFolders(2, 2, 0));
         folders.AddRange(createNewFolders(2, 0, 2));
-        //Melanger folders !
+        for (int i = 0; i < folders.Count; i++)
+        {
+            Folder temp = folders[i];
+            int randomIndex = Random.Range(i, folders.Count);
+            folders[i] = folders[randomIndex];
+            folders[randomIndex] = temp;
+        }
     }
 	
 	void Update ()
     {
         if (folders.Count == 0)
             return;
+        print("update");
         Vector3 rotation = Camera.main.transform.eulerAngles;
-        if (Mathf.Abs(rotation.y) < 45 || Mathf.Abs(rotation.y) > 315)
+        if (Mathf.Abs(rotation.y) < 20 || Mathf.Abs(rotation.y) > 340)
         {
             folders[0].highlighted = true;
         }

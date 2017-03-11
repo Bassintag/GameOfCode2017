@@ -15,12 +15,15 @@ public class Folder : MonoBehaviour {
 
     public List<Actions.Action> actions;
 
+    private Vector3 start;
+
     void Awake() {
         finish = false;
         actions = new List<Actions.Action>();
         StartCoroutine(createNewFolder());
         highlighted = false;
         wasHighlighted = false;
+        start = transform.position;
     }
 
     IEnumerator createNewFolder()
@@ -52,7 +55,7 @@ public class Folder : MonoBehaviour {
 
     IEnumerator bringToFront()
     {
-        float start = transform.eulerAngles.x;
+        float a = transform.eulerAngles.x;
         float y = transform.position.y;
         float x = transform.position.x;
         float z = transform.position.z;
@@ -60,15 +63,15 @@ public class Folder : MonoBehaviour {
         {
             if (!highlighted)
                 break;
-            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 0, i / 100f), 0);
-            transform.position = new Vector3(x, Mathf.Lerp(y, 2.5f, i / 100f), z);
+            transform.eulerAngles = new Vector3(Mathf.LerpAngle(a, 0, i / 100f), 0);
+            transform.position = new Vector3(x, Mathf.Lerp(y, start.y + 2.5f, i / 100f), Mathf.Lerp(z, start.z - 1f, i / 100f));
             yield return new WaitForSeconds(.005f);
         }
     }
 
     IEnumerator bringToBack()
     {
-        float start = transform.eulerAngles.x;
+        float a = transform.eulerAngles.x;
         float y = transform.position.y;
         float x = transform.position.x;
         float z = transform.position.z;
@@ -76,8 +79,8 @@ public class Folder : MonoBehaviour {
         {
             if (highlighted)
                 break;
-            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 90, i / 100f), 0);
-            transform.position = new Vector3(x, Mathf.Lerp(y, 0, i / 100f), z);
+            transform.eulerAngles = new Vector3(Mathf.LerpAngle(a, 90, i / 100f), 0);
+            transform.position = new Vector3(x, Mathf.Lerp(y, start.y, i / 100f), Mathf.Lerp(z, start.z, i / 100f));
             yield return new WaitForSeconds(.005f);
         }
     }
