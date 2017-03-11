@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public List<Folder> folders;
     public Folder prefab;
 
-    public List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
+    private List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
     {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
