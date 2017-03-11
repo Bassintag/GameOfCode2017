@@ -13,9 +13,8 @@ public class GameManager : MonoBehaviour {
         List<Folder> folders = new List<Folder>();
         while (folders.Count < number_folders)
         {
-            Folder folder = Instantiate(prefab, transform.position + new Vector3(0, (this.folders.Count + number_folders - folders.Count) / 30f, 0), Quaternion.identity);
+            Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
             folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
-            folder.name = "Folder (id: " + (this.folders.Count + folders.Count) + ")";
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)
@@ -62,6 +61,12 @@ public class GameManager : MonoBehaviour {
             int randomIndex = Random.Range(i, folders.Count);
             folders[i] = folders[randomIndex];
             folders[randomIndex] = temp;
+        }
+        for (int i = 0; i < folders.Count; i++)
+        {
+            folders[i].name = "Folder (id: " + i + ")";
+            folders[i].transform.position += new Vector3(0, (folders.Count - i) / 50f, 0);
+            folders[i].UpdateStartPosition();
         }
     }
 	

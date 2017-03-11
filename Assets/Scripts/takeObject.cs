@@ -24,7 +24,6 @@ public class takeObject : MonoBehaviour
         //Cross.sprite = newSprite;
         Cross.SetActive(true);
         Cross2.SetActive(false);
-        Debug.Log("YOLO");
     }
 
     void OnTriggerExit(Collider col)
@@ -37,7 +36,6 @@ public class takeObject : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        Debug.Log("STAY");
         fill.fillAmount += 1.0f / timetoTake * Time.deltaTime;
         StartCoroutine("TakeItem");
     }

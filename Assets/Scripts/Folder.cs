@@ -23,7 +23,7 @@ public class Folder : MonoBehaviour {
         StartCoroutine(createNewFolder());
         highlighted = false;
         wasHighlighted = false;
-        start = transform.position;
+        UpdateStartPosition();
     }
 
     IEnumerator createNewFolder()
@@ -93,6 +93,11 @@ public class Folder : MonoBehaviour {
             str += "- " + a.text + "\n\n";
         }
         characterActions.text = str;
+    }
+
+    public void UpdateStartPosition()
+    {
+        start = transform.position;
     }
 
     void Update()
