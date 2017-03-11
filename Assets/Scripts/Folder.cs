@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Folder : MonoBehaviour {
 
+    private bool wasHighlighted;
+    public bool highlighted { get; set; }
+
 	void Start() {
         int idx_surname = Random.Range(0, CharacterProvider.instance.surnames.Length - 1);
         CharacterProvider.Surname surname = CharacterProvider.instance.surnames[idx_surname];
@@ -17,5 +20,15 @@ public class Folder : MonoBehaviour {
             avatar = CharacterProvider.instance.avatars[idx_avatar];
         }
         Debug.Log(surname + " " + name + " (" + avatar + ")");
+        highlighted = false;
+        wasHighlighted = false;
+    }
+
+    void Udpate()
+    {
+        if (wasHighlighted && !highlighted)
+        {
+
+        }
     }
 }
