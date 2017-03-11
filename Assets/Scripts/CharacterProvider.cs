@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CharacterProvider : MonoBehaviour {
 
-    public Avatar[] avatars;
-    public Surname[] surnames;
+    public string[] surnames;
     public string[] names;
 
     public static CharacterProvider instance;
@@ -15,19 +14,5 @@ public class CharacterProvider : MonoBehaviour {
         if (instance != null)
             Destroy(this);
         instance = this;
-    }
-
-    [System.Serializable]
-    public class Surname
-    {
-        public string surname;
-        public bool female;
-    }
-
-    [System.Serializable]
-    public class Avatar
-    {
-        public Sprite avatar;
-        public bool female;
     }
 }
