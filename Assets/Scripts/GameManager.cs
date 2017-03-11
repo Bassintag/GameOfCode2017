@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour {
     {
         if (folders.Count == 0)
             return;
-        print("update");
         Vector3 rotation = Camera.main.transform.eulerAngles;
         if (Mathf.Abs(rotation.y) < 20 || Mathf.Abs(rotation.y) > 340)
         {
