@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
             {
                 Folder f = folders[0];
                 folders.Remove(f);
-                f.enabled = false;
+                Destroy(f.gameObject);
                 heavenQueue.Add(f);
             }
             else if (gobj.tag == "tray_hell")
