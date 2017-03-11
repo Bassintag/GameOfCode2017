@@ -12,27 +12,34 @@ public class Folder : MonoBehaviour {
     public Text characterSurname;
 
     void Start() {
-        int idx_surname = Random.Range(0, CharacterProvider.instance.surnames.Length - 1);
-        string surname = CharacterProvider.instance.surnames[idx_surname];
-        int idx_name = Random.Range(0, CharacterProvider.instance.names.Length - 1);
-        string name = CharacterProvider.instance.names[idx_name];
-
-        characterName.text = name;
-        characterSurname.text = surname;
-
-        StartCoroutine(createNewFolder(surname, name));
+        StartCoroutine(createNewFolder());
         highlighted = false;
         wasHighlighted = false;
     }
 
-    IEnumerator createNewFolder(string surname, string name)
+    IEnumerator createNewFolder()
     {
-        WWW www = new WWW("http://api.adorable.io/avatars/285/" + surname + name + ".png");
+        characterName.text = "Doe";
+        characterSurname.text = "John";
+        string span = "<span class=\"heavyhuge\">";
+        string endspan = " </span></p>";
+        WWW www2 = new WWW("http://www.behindthename.com/random/random.php?number=1&gender=m&surname=&randomsurname=yes&all=no&usage_fairy=1&usage_fntsy=1");
+        yield return www2;
+        if (www2.text.Contains(span))
+        {
+            int ix = www2.text.IndexOf(span);
+            int ix2 = www2.text.Substring(ix + span.Length + 2).IndexOf(endspan);
+            if (ix != -1 && ix2 != -1)
+            {
+                string code = www2.text.Substring(ix + span.Length + 2, ix2);
+                string[] codes = code.Split(' ');
+                characterSurname.text = codes[0];
+                characterName.text = codes[codes.Length - 1];
+            }
+        }
+        WWW www = new WWW("http://api.adorable.io/avatars/285/" + WWW.EscapeURL(characterSurname.text + characterName.text) + ".png");
         yield return www;
         avatar.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
-     //   WWW www2 = new WWW("http://www.behindthename.com/random/random.php?number=1&gender=m&surname=&randomsurname=yes&all=no&usage_fairy=1&usage_fntsy=1");
-      //  yield return www2;
-      //  Debug.Log(www2.text);
     }
 
     IEnumerator bringToFront()
