@@ -19,7 +19,6 @@ public class Folder : MonoBehaviour {
             int idx_avatar = Random.Range(0, CharacterProvider.instance.avatars.Length - 1);
             avatar = CharacterProvider.instance.avatars[idx_avatar];
         }
-        Debug.Log(surname + " " + name + " (" + avatar + ")");
         highlighted = false;
         wasHighlighted = false;
     }
@@ -27,11 +26,15 @@ public class Folder : MonoBehaviour {
     IEnumerator bringToFront()
     {
         float start = transform.eulerAngles.x;
+        float y = transform.position.y;
+        float x = transform.position.x;
+        float z = transform.position.z;
         for (int i = 0; i <= 100; i += 4)
         {
             if (!highlighted)
                 break;
             transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 0, i / 100f), 0);
+            transform.position = new Vector3(x, Mathf.Lerp(y, 2.5f, i / 100f), z);
             yield return new WaitForSeconds(.005f);
         }
     }
@@ -39,11 +42,15 @@ public class Folder : MonoBehaviour {
     IEnumerator bringToBack()
     {
         float start = transform.eulerAngles.x;
+        float y = transform.position.y;
+        float x = transform.position.x;
+        float z = transform.position.z;
         for (int i = 0; i <= 100; i += 4)
         {
             if (highlighted)
                 break;
-            transform.eulerAngles = new Vector3(start - Mathf.LerpAngle(90, start, i / 100f), 0);
+            transform.eulerAngles = new Vector3(Mathf.LerpAngle(start, 90, i / 100f), 0);
+            transform.position = new Vector3(x, Mathf.Lerp(y, 0, i / 100f), z);
             yield return new WaitForSeconds(.005f);
         }
     }
