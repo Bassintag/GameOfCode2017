@@ -8,12 +8,17 @@ public class Folder : MonoBehaviour {
     private bool wasHighlighted;
     public bool highlighted { get; set; }
     public Image avatar;
+    public Text characterName;
+    public Text characterSurname;
 
     void Start() {
         int idx_surname = Random.Range(0, CharacterProvider.instance.surnames.Length - 1);
         string surname = CharacterProvider.instance.surnames[idx_surname];
         int idx_name = Random.Range(0, CharacterProvider.instance.names.Length - 1);
         string name = CharacterProvider.instance.names[idx_name];
+
+        characterName.text = name;
+        characterSurname.text = surname;
 
         StartCoroutine(createNewFolder(surname, name));
         highlighted = false;
