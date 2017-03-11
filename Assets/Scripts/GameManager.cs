@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour {
             return;
         print("update");
         Vector3 rotation = Camera.main.transform.eulerAngles;
-        if (Mathf.Abs(rotation.y) < 45 || Mathf.Abs(rotation.y) > 315)
+        if (Mathf.Abs(rotation.y) < 20 || Mathf.Abs(rotation.y) > 340)
         {
             folders[0].highlighted = true;
         }
