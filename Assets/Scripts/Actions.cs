@@ -7,7 +7,7 @@ public class Actions : MonoBehaviour {
     public static Actions instance;
     public List<Action> actions;
 
-    void Start () {
+    void Awake () {
         if (instance != null)
             Destroy(instance);
         actions = new List<Action>();

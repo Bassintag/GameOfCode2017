@@ -10,6 +10,10 @@ public class Folder : MonoBehaviour {
     public Image avatar;
     public Text characterName;
     public Text characterSurname;
+    public Text characterActions;
+
+    [HideInInspector]
+    public List<Actions.Action> actions = new List<Actions.Action>();
 
     void Start() {
         StartCoroutine(createNewFolder());
@@ -40,6 +44,7 @@ public class Folder : MonoBehaviour {
         WWW www = new WWW("http://api.adorable.io/avatars/285/" + WWW.EscapeURL(characterSurname.text + characterName.text) + ".png");
         yield return www;
         avatar.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
+        GenerateText();
     }
 
     IEnumerator bringToFront()
@@ -72,6 +77,16 @@ public class Folder : MonoBehaviour {
             transform.position = new Vector3(x, Mathf.Lerp(y, 0, i / 100f), z);
             yield return new WaitForSeconds(.005f);
         }
+    }
+
+    void GenerateText()
+    {
+        string str = "";
+        foreach (Actions.Action a in actions)
+        {
+            str += a.text + "\n";
+        }
+        characterActions.text = str;
     }
 
     void Update()
