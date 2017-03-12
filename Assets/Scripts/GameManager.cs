@@ -111,9 +111,14 @@ public class GameManager : MonoBehaviour {
 
     private void UpdateIndicators()
     {
-        print(heavenQueue.Count + " " + hellQueue.Count);
-        indicatorHeaven.text = "Remaining: " + (folderCount / 2 - heavenQueue.Count);
-        indicatorHell.text = "Remaining: " + (folderCount / 2 - hellQueue.Count);
+        int relHeaven = folderCount / 2 - heavenQueue.Count;
+        int relHell = folderCount / 2 - hellQueue.Count;
+        indicatorHeaven.text = "Remaining: " + relHeaven;
+        indicatorHell.text = "Remaining: " + relHell;
+        if (relHeaven <= 0)
+            GameObject.FindGameObjectWithTag("tray_heaven").GetComponent<Collider>().enabled = false;
+        if (relHell <= 0)
+            GameObject.FindGameObjectWithTag("tray_hell").GetComponent<Collider>().enabled = false;
     }
 
     private void AddToQueue(GameObject gobj, bool heaven)
