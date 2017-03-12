@@ -12,11 +12,6 @@ public class spawntext : MonoBehaviour {
 	void Start () {
         StartCoroutine(SpawnText());
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     IEnumerator SpawnText()
     {
@@ -38,7 +33,7 @@ public class spawntext : MonoBehaviour {
             Textbase.text += TextSpawn[1][i];
         }
         yield return new WaitForSeconds(0.25f);
-        float time = GameObject.Find("FadingSystem").GetComponent<Fading>().BeginFade(1);
+        FindObjectOfType<Fading>().BeginFade(1);
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(1);
     }
