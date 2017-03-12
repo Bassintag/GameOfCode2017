@@ -26,6 +26,22 @@ public class Folder : MonoBehaviour {
         UpdateStartPosition();
     }
 
+    public Folder createYourFolder()
+    {
+        Folder toRet = new Folder();
+        toRet.actions = new List<Actions.Action>();
+        characterName.text = "?????";
+        characterSurname.text = "?????";
+        toRet.actions.Clear();
+        toRet.actions.Add(new Actions.Action(0, "Judged people"));
+        toRet.actions.Add(new Actions.Action(-0.3f, "Probably punished good people for bad choices they were forced to make, despite of their feelings"));
+        highlighted = false;
+        UpdateStartPosition();
+
+        return toRet;
+
+    }
+    
     IEnumerator createNewFolder()
     {
         characterName.text = "Doe";

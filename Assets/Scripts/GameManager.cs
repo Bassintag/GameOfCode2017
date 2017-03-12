@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     [HideInInspector]
+    public float karma = 0;
+    [HideInInspector]
     public List<Folder> folders;
     [HideInInspector]
     public List<Folder> heavenQueue;
@@ -77,6 +79,15 @@ public class GameManager : MonoBehaviour {
             }
             folders.Add(folder);
         }
+        return folders;
+    }
+
+    public List<Folder> createYourFolder()
+    {
+        Folder yFolder = new Folder();
+        yFolder = yFolder.createYourFolder();
+        folders.Add(yFolder);
+
         return folders;
     }
 
@@ -157,15 +168,33 @@ public class GameManager : MonoBehaviour {
 
     private void AddToQueue(GameObject gobj, bool heaven)
     {
+        float averageKarma = 0;
+
         Folder f = folders[0];
         folders.Remove(f);
+        for (int i = 0; i < f.actions.Count; i++)
+            averageKarma += f.actions[i].karma;
         f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
         if (heaven)
+        {
+            if (averageKarma > 0.0f)
+                karma += averageKarma;
+            else
+                karma -= averageKarma;
             heavenQueue.Add(f);
+        }
         else
+        {
+            if (averageKarma <= 0.0f)
+                karma += averageKarma;
+            else
+                karma -= averageKarma;
             hellQueue.Add(f);
+        }
         UpdateIndicators();
     }
+
+
 
     public void OnSelectTray(takeObject obj)
     {
@@ -182,5 +211,13 @@ public class GameManager : MonoBehaviour {
             level = (level + 1) % 7;
             Reset();
         }
+    }
+
+    public bool defineIfWin()
+    {
+        if ((karma -= 0.3f) > 0)
+            return true;
+        else
+            return false;
     }
 }
