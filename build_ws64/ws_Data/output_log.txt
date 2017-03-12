@@ -1,0 +1,56 @@
+Mono path[0] = 'C:/Users/PC/Documents/Github/GameOfCode2017/build_ws64/ws_Data/Managed'
+Mono path[1] = 'C:/Users/PC/Documents/Github/GameOfCode2017/build_ws64/ws_Data/Mono'
+Mono config path = 'C:/Users/PC/Documents/Github/GameOfCode2017/build_ws64/ws_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/PC/Documents/Github/GameOfCode2017/build_ws64/ws_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55484
+Multi-casting "[IP] 192.168.56.1 [Port] 55484 [Flags] 2 [Guid] 1148812811 [EditorId] 2711615010 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-M2N5KQ8) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55484]
+PlayerConnection already initialized - listening to [0.0.0.0:55484]
+Initialize engine version: 5.5.0f3 (38b4efef76f0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 1060 (ID=0x1c20)
+    Vendor:   NVIDIA
+    VRAM:     6100 MB
+    Driver:   20.19.15.4454
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.VR.dll (this message is harmless)
+Loading C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
+- Completed reload, in  0.112 seconds
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\PC\Documents\Github\GameOfCode2017\build_ws64\ws_Data\Managed\System.dll (this message is harmless)
+OnLevelWasLoaded was found on Fading
+This message has been deprecated and will be removed in a later version of Unity.
+Add a delegate to SceneManager.sceneLoaded instead to get notifications after scene loading has completed
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Mono/MonoScriptCache.cpp Line: 382)
+
+desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Overlay is using an unsupported compressed pixel format.UnloadTime: 1.264590 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1b7c -> priority: 1 
+  Thread -> id: 392c -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.822510 ms
+System memory in use before: 23.6 MB.
+System memory in use after: 23.7 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 989.
+Total: 0.406517 ms (FindLiveObjects: 0.046222 ms CreateObjectMapping: 0.019753 ms MarkObjects: 0.319209 ms  DeleteObjects: 0.016592 ms)
+

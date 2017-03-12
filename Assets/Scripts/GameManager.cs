@@ -174,6 +174,14 @@ public class GameManager : MonoBehaviour {
         folders.Remove(f);
         for (int i = 0; i < f.actions.Count; i++)
             averageKarma += f.actions[i].karma;
+        if (heaven)
+        {
+            f.tampon_heaven.enabled = true;
+        }
+        else
+        {
+            f.tampon_hell.enabled = true;
+        }
         f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
         if (heaven)
         {
