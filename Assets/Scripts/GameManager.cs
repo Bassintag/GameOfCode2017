@@ -122,7 +122,6 @@ public class GameManager : MonoBehaviour {
             folderCount = 4;
             maxHeaven = 2;
             maxHell = 2;
-            GameObject.Find("maketransition").GetComponent<maketransition>().gotransit(1);
             folders.AddRange(createNewFolders(1, 1, 0));
             folders.AddRange(createNewFolders(1, 0, 1));
             folders.AddRange(createNewFolders(1, 2, 0));
@@ -254,7 +253,6 @@ public class GameManager : MonoBehaviour {
         }
         if ((heavenLocked && hellLocked) || folders.Count == 0)
         {
-            // Score des deux dossiers de la partie
             foreach (Folder f in heavenQueue)
             {
                 foreach (Actions.Action a in f.actions)
