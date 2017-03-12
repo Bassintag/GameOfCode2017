@@ -42,7 +42,8 @@ public class takeObject : MonoBehaviour
     {
         Cross.SetActive(false);
         Cross2.SetActive(true);
-        base.StopAllCoroutines();
+        StartCoroutine("Unfill");
+        StopCoroutine("TakeItem");
     }
 
     IEnumerator Unfill()
