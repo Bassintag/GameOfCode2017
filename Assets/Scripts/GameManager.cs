@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour {
 
     private void UpdateIndicators()
     {
+        print(heavenQueue.Count + " " + hellQueue.Count);
         indicatorHeaven.text = "Remaining: " + (folderCount / 2 - heavenQueue.Count);
         indicatorHell.text = "Remaining: " + (folderCount / 2 - hellQueue.Count);
     }
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour {
             heavenQueue.Add(f);
         else
             hellQueue.Add(f);
+        UpdateIndicators();
     }
 
     public void OnSelectTray(takeObject obj)
