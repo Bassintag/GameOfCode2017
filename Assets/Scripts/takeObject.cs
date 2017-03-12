@@ -6,9 +6,6 @@ using UnityEngine.Events;
 
 public class takeObject : MonoBehaviour
 {
-
-    /*Transform child = transform.Find("ObjectName");
-    Text t = child.GetComponent<Text>();*/
     public GameObject Cross;
     public GameObject Cross2;
     public Sprite newSprite;
@@ -22,8 +19,6 @@ public class takeObject : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        //this.transform.getComponent<UnityEngine.UI.Image>().sprite = newSprite;
-        //Cross.sprite = newSprite;
         Cross.SetActive(true);
         Cross2.SetActive(false);
         StartCoroutine("TakeItem");
@@ -41,6 +36,13 @@ public class takeObject : MonoBehaviour
     {
         fill.fillAmount += 1.0f / timetoTake * Time.deltaTime;
         hovered = col;
+    }
+
+    new public void StopAllCoroutines()
+    {
+        Cross.SetActive(false);
+        Cross2.SetActive(true);
+        base.StopAllCoroutines();
     }
 
     IEnumerator Unfill()
