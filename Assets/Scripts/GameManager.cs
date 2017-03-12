@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
         {
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
             folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
+            folder.avatar.gameObject.transform.eulerAngles = folder.gameObject.transform.eulerAngles + new Vector3(0, 0 , Random.Range(-10, 10));
             int tmp_max_bad_action = max_bad_actions;
             int tmp_max_good_action = max_good_action;
             while (tmp_max_good_action + tmp_max_bad_action != 0)

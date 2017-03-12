@@ -13,7 +13,7 @@ public class Actions : MonoBehaviour {
         actions = new List<Action>();
         actions.Add(new Action(-1f, "Killed someone"));
         actions.Add(new Action(-1f, "Sold his soul to the devil"));
-        actions.Add(new Action(-0.8f, "Escaped from  prison"));
+        actions.Add(new Action(-0.8f, "Escaped from prison"));
         actions.Add(new Action(-0.8f, "Robbed an homeless"));
         actions.Add(new Action(-0.6f, "Cheated on his wife"));
         actions.Add(new Action(-0.6f, "Ate his hamster"));
