@@ -130,6 +130,8 @@ public class GameManager : MonoBehaviour {
  /*       else if (level == 2)
         {
             folderCount = 10;
+            maxHeaven = 5;
+            maxHell = 5;
             folders.AddRange(createNewFolders(2, 1, 1));
             folders.AddRange(createNewFolders(1, 2, 1));
             folders.AddRange(createNewFolders(1, 1, 2));
