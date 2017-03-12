@@ -13,19 +13,20 @@ public class GameManager : MonoBehaviour {
     public List<Folder> hellQueue;
 
     private int folderCount = 10;
+    private bool heavenLocked = false;
+    private bool hellLocked = false;
 
     [Range(1, 7)]
     public int level = 1;
-
     public Folder prefab;
-
     public Text indicatorHeaven;
-
     public Text indicatorHell;
 
     private List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
     {
         List<Folder> folders = new List<Folder>();
+        heavenLocked = false;
+        hellLocked = false;
         while (folders.Count < number_folders)
         {
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
+        DontDestroyOnLoad(this);
         folders = new List<Folder>();
         heavenQueue = new List<Folder>();
         hellQueue = new List<Folder>();
@@ -115,10 +117,18 @@ public class GameManager : MonoBehaviour {
         int relHell = folderCount / 2 - hellQueue.Count;
         indicatorHeaven.text = "Remaining: " + relHeaven;
         indicatorHell.text = "Remaining: " + relHell;
-        if (relHeaven <= 0)
+        if (relHeaven <= 0 && !heavenLocked)
+        {
+            heavenLocked = true;
+            FindObjectOfType<takeObject>().StopAllCoroutines();
             GameObject.FindGameObjectWithTag("tray_heaven").GetComponent<Collider>().enabled = false;
-        if (relHell <= 0)
+        }
+        if (relHell <= 0 && !hellLocked)
+        {
+            hellLocked = true;
+            FindObjectOfType<takeObject>().StopAllCoroutines();
             GameObject.FindGameObjectWithTag("tray_hell").GetComponent<Collider>().enabled = false;
+        }
     }
 
     private void AddToQueue(GameObject gobj, bool heaven)
@@ -142,6 +152,10 @@ public class GameManager : MonoBehaviour {
                 AddToQueue(gobj, true);
             else if (gobj.tag == "tray_hell")
                 AddToQueue(gobj, false);
+        }
+        if (folderCount == 0)
+        {
+
         }
     }
 }

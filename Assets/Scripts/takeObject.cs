@@ -43,6 +43,13 @@ public class takeObject : MonoBehaviour
         hovered = col;
     }
 
+    new public void StopAllCoroutines()
+    {
+        Cross.SetActive(false);
+        Cross2.SetActive(true);
+        base.StopAllCoroutines();
+    }
+
     IEnumerator Unfill()
     {
         yield return new WaitForSeconds(0.1f);
