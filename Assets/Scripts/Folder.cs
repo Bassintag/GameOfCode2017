@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Folder : MonoBehaviour {
 
     private bool wasHighlighted;
+    private bool isYou;
     public bool highlighted { get; set; }
     public Image avatar;
     public Text characterName;
@@ -20,6 +21,7 @@ public class Folder : MonoBehaviour {
     private Vector3 start;
 
     void Awake() {
+        isYou = false;
         finish = false;
         actions = new List<Actions.Action>();
         StartCoroutine(createNewFolder());
@@ -30,6 +32,7 @@ public class Folder : MonoBehaviour {
 
     public void createYourFolder(float bad_karma_heaven, float bad_karma_hell, float good_karma_heaven, float good_karma_hell)
     {
+        isYou = true;
         characterName.text = "?????";
         characterSurname.text = "?????";
         actions.Clear();
@@ -65,7 +68,7 @@ public class Folder : MonoBehaviour {
         {
             int ix = www2.text.IndexOf(span);
             int ix2 = www2.text.Substring(ix + span.Length + 2).IndexOf(endspan);
-            if (ix != -1 && ix2 != -1)
+            if (!isYou && ix != -1 && ix2 != -1)
             {
                 string code = www2.text.Substring(ix + span.Length + 2, ix2);
                 string[] codes = code.Split(' ');
