@@ -41,8 +41,8 @@ public class Folder : MonoBehaviour {
         good_karma_heaven = Math.Abs(good_karma_heaven);
         good_karma_hell = Math.Abs(good_karma_hell);
         actions.Add(new Actions.Action(0, "Judged and probably punished good people for bad choices they were forced to make, despite of their feelings"));
-        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_hell / (bad_karma_hell + good_karma_hell) * 100), 1) + "% of the people that this guy sent to hell had a share of goodness in them!"));
-        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_heaven / (good_karma_heaven + bad_karma_heaven) * 100), 1) + "% of the people that this guy sent to heaven had a share of badness in them!"));
+        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_hell / (bad_karma_hell + good_karma_hell) * 100), 1) + "% of the people that this guy sent to hell had a part of goodness in them!"));
+        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_heaven / (good_karma_heaven + bad_karma_heaven) * 100), 1) + "% of the people that this guy sent to heaven had a part of badness in them!"));
 
         wasHighlighted = false;
         highlighted = true;

@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
     public List<Folder> hellQueue;
 
     private int folderCount = 10;
+    private int maxHeaven;
+    private int maxHell;
+
     private bool _heavenLocked;
     private bool heavenLocked { get { return _heavenLocked; } set
         {
@@ -117,6 +120,8 @@ public class GameManager : MonoBehaviour {
         if (level == 1)
         {
             folderCount = 4;
+            maxHeaven = 2;
+            maxHell = 2;
             folders.AddRange(createNewFolders(1, 1, 0));
             folders.AddRange(createNewFolders(1, 0, 1));
             folders.AddRange(createNewFolders(1, 2, 0));
@@ -141,7 +146,16 @@ public class GameManager : MonoBehaviour {
             folder.createYourFolder(bad_karma_heaven, bad_karma_hell, good_karma_heaven, good_karma_hell);
             folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
             folder.avatar.gameObject.transform.eulerAngles = folder.gameObject.transform.eulerAngles + new Vector3(0, 0, Random.Range(-10, 10));
-            // lock hell ou heaven en fonction du resultat
+            if (defineIfWin())
+            {
+                maxHeaven = 1;
+                maxHell = 0;
+            }
+            else
+            {
+                maxHeaven = 0;
+                maxHell = 1;
+            }
         }
         for (int i = 0; i < folders.Count; i++)
         {
@@ -172,8 +186,8 @@ public class GameManager : MonoBehaviour {
 
     private void UpdateIndicators()
     {
-        int relHeaven = folderCount / 2 - heavenQueue.Count;
-        int relHell = folderCount / 2 - hellQueue.Count;
+        int relHeaven = maxHeaven - heavenQueue.Count;
+        int relHell = maxHell - hellQueue.Count;
         indicatorHeaven.text = "Remaining: " + relHeaven;
         indicatorHell.text = "Remaining: " + relHell;
         if (relHeaven <= 0 && !heavenLocked)
@@ -224,8 +238,6 @@ public class GameManager : MonoBehaviour {
         UpdateIndicators();
     }
 
-
-
     public void OnSelectTray(takeObject obj)
     {
         GameObject gobj;
@@ -259,9 +271,16 @@ public class GameManager : MonoBehaviour {
                         good_karma_hell += a.karma;
                 }
             }
-            level = (level + 1) % 7;
-            Reset();
+            if (level < 7)
+                StartCoroutine(LoadNextLevel());
         }
+    }
+
+    IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSeconds(2);
+        level = (level + 1) % 7;
+        Reset();
     }
 
     public bool defineIfWin()
