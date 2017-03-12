@@ -12,7 +12,8 @@ public class Folder : MonoBehaviour {
     public Text characterSurname;
     public Text characterActions;
     public bool finish;
-
+    public Image tampon_hell;
+    public Image tampon_heaven;
     public List<Actions.Action> actions;
 
     private Vector3 start;

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9b0d60736658b1a4db5000b275aecf2c
-timeCreated: 1489279745
+guid: 8911d4fccf828714885047ae70419e09
+timeCreated: 1489283511
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: 'Top Secret '
+  fontName: Old Stamper
   fontNames:
-  - 'Top Secret '
+  - Old Stamper
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
