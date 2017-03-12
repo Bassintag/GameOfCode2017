@@ -15,6 +15,6 @@ public class lvlmanager : MonoBehaviour {
     IEnumerator Fadeswitch()
     {
         float time = GameObject.Find("FadingSystem").GetComponent<Fading>().BeginFade(1);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
     }
 }
