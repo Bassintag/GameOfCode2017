@@ -37,9 +37,8 @@ public class spawntext : MonoBehaviour {
             yield return new WaitForSeconds(0.15f);
             Textbase.text += TextSpawn[1][i];
         }
-        yield return new WaitForSeconds(0.25f);
         float time = GameObject.Find("FadingSystem").GetComponent<Fading>().BeginFade(1);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene(1);
     }
 }

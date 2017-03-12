@@ -18,8 +18,9 @@ public class Fading : MonoBehaviour {
         fadeDir = direction;
         return (fadeSpeed);
     }
-    void OnLevelWasLoaded() {
-        // alpha = 1;
+
+/*    void OnLevelWasLoaded() {
+        //alpha = 1;
         BeginFade(-1);
-    }
+    }*/
 }

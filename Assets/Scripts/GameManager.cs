@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour {
             folderCount = 4;
             maxHeaven = 2;
             maxHell = 2;
+            GameObject.Find("maketransition").GetComponent<maketransition>().gotransit(1);
             folders.AddRange(createNewFolders(1, 1, 0));
             folders.AddRange(createNewFolders(1, 0, 1));
             folders.AddRange(createNewFolders(1, 2, 0));
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour {
         }*/
         else
         {
+            GameObject.Find("maketransition").GetComponent<maketransition>().gotransit(2);
             folderCount = 1;
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
             folder.createYourFolder(bad_karma_heaven, bad_karma_hell, good_karma_heaven, good_karma_hell);
