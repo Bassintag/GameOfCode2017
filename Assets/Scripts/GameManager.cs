@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector]
     public float karma = 0;
+    public float bad_karma_hell = 0;
+    public float bad_karma_heaven = 0;
+    public float good_karma_hell = 0;
+    public float good_karma_heaven = 0;
     [HideInInspector]
     public List<Folder> folders;
     [HideInInspector]
@@ -84,8 +88,8 @@ public class GameManager : MonoBehaviour {
 
     public List<Folder> createYourFolder()
     {
-        Folder yFolder = new Folder();
-        yFolder = yFolder.createYourFolder();
+        Folder yFolder = Instantiate(prefab, transform.position, Quaternion.identity);
+        yFolder.createYourFolder(bad_karma_heaven, bad_karma_hell, good_karma_heaven, good_karma_hell);
         folders.Add(yFolder);
 
         return folders;
@@ -110,16 +114,34 @@ public class GameManager : MonoBehaviour {
         hellQueue = new List<Folder>();
         heavenLocked = false;
         hellLocked = false;
-        if (level != 7)
+        if (level == 1)
+        {
+            folderCount = 4;
+            folders.AddRange(createNewFolders(1, 1, 0));
+            folders.AddRange(createNewFolders(1, 0, 1));
+            folders.AddRange(createNewFolders(1, 2, 0));
+            folders.AddRange(createNewFolders(1, 0, 2));
+        }
+ /*       else if (level == 2)
         {
             folderCount = 10;
-            folders.AddRange(createNewFolders(folderCount / 2, 3, 0));
-            folders.AddRange(createNewFolders(folderCount / 2, 0, 3));
-        }
+            folders.AddRange(createNewFolders(2, 1, 1));
+            folders.AddRange(createNewFolders(1, 2, 1));
+            folders.AddRange(createNewFolders(1, 1, 2));
+            folders.AddRange(createNewFolders(1, 2, 2));
+            folders.AddRange(createNewFolders(1, 0, 2));
+            folders.AddRange(createNewFolders(1, 2, 0));
+            folders.AddRange(createNewFolders(1, 3, 2));
+            folders.AddRange(createNewFolders(2, 1, 3));
+        }*/
         else
         {
             folderCount = 1;
-            folders.AddRange(createNewFolders(folderCount, 0, 1));
+            Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
+            folder.createYourFolder(bad_karma_heaven, bad_karma_hell, good_karma_heaven, good_karma_hell);
+            folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
+            folder.avatar.gameObject.transform.eulerAngles = folder.gameObject.transform.eulerAngles + new Vector3(0, 0, Random.Range(-10, 10));
+            // lock hell ou heaven en fonction du resultat
         }
         for (int i = 0; i < folders.Count; i++)
         {
@@ -214,8 +236,29 @@ public class GameManager : MonoBehaviour {
             else if (gobj.tag == "tray_hell")
                 AddToQueue(gobj, false);
         }
-        if (heavenLocked && hellLocked)
+        if ((heavenLocked && hellLocked) || folders.Count == 0)
         {
+            // Score des deux dossiers de la partie
+            foreach (Folder f in heavenQueue)
+            {
+                foreach (Actions.Action a in f.actions)
+                {
+                    if (a.karma < 0)
+                        bad_karma_heaven += a.karma;
+                    else
+                        good_karma_heaven += a.karma;
+                }
+            }
+            foreach (Folder f in hellQueue)
+            {
+                foreach (Actions.Action a in f.actions)
+                {
+                    if (a.karma > 0)
+                        bad_karma_hell += a.karma;
+                    else
+                        good_karma_hell += a.karma;
+                }
+            }
             level = (level + 1) % 7;
             Reset();
         }

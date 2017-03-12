@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,22 +28,31 @@ public class Folder : MonoBehaviour {
         UpdateStartPosition();
     }
 
-    public Folder createYourFolder()
+    public void createYourFolder(float bad_karma_heaven, float bad_karma_hell, float good_karma_heaven, float good_karma_hell)
     {
-        Folder toRet = new Folder();
-        toRet.actions = new List<Actions.Action>();
         characterName.text = "?????";
         characterSurname.text = "?????";
-        toRet.actions.Clear();
-        toRet.actions.Add(new Actions.Action(0, "Judged people"));
-        toRet.actions.Add(new Actions.Action(-0.3f, "Probably punished good people for bad choices they were forced to make, despite of their feelings"));
-        highlighted = false;
-        UpdateStartPosition();
+        actions.Clear();
+        bad_karma_heaven = Math.Abs(bad_karma_heaven);
+        bad_karma_hell = Math.Abs(bad_karma_hell);
+        good_karma_heaven = Math.Abs(good_karma_heaven);
+        good_karma_hell = Math.Abs(good_karma_hell);
+        actions.Add(new Actions.Action(0, "Judged and probably punished good people for bad choices they were forced to make, despite of their feelings"));
+        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_hell / (bad_karma_hell + good_karma_hell) * 100), 1) + "% of the people that this guy sent to hell had a share of goodness in them!"));
+        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_heaven / (good_karma_heaven + bad_karma_heaven) * 100), 1) + "% of the people that this guy sent to heaven had a share of badness in them!"));
 
-        return toRet;
+        wasHighlighted = false;
+        highlighted = true;
+        UpdateStartPosition();
+     //   actions.Clear();
+        actions.Add(new Actions.Action(0, "Did you recognize him? Yes, it is you ! All of this little game was about to test you, and now the judge is gonna be judged !"));
+        if ((good_karma_heaven + good_karma_hell) > (bad_karma_heaven + bad_karma_hell))
+            actions.Add(new Actions.Action(0, "You are lucky, we decided you to send you to Heaven !"));
+        else
+            actions.Add(new Actions.Action(0, "You gonna stay in Hell for the eternity !"));
 
     }
-    
+
     IEnumerator createNewFolder()
     {
         characterName.text = "Doe";
