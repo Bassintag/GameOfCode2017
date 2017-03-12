@@ -13,8 +13,23 @@ public class GameManager : MonoBehaviour {
     public List<Folder> hellQueue;
 
     private int folderCount = 10;
-    private bool heavenLocked = false;
-    private bool hellLocked = false;
+    private bool _heavenLocked;
+    private bool heavenLocked { get { return _heavenLocked; } set
+        {
+            _heavenLocked = value;
+            GameObject.FindGameObjectWithTag("tray_heaven").GetComponent<Collider>().enabled = !value;
+        }
+    }
+    private bool _hellLocked;
+    private bool hellLocked
+    {
+        get { return _hellLocked; }
+        set
+        {
+            _hellLocked = value;
+            GameObject.FindGameObjectWithTag("tray_hell").GetComponent<Collider>().enabled = !value;
+        }
+    }
 
     [Range(1, 7)]
     public int level = 1;
@@ -25,8 +40,6 @@ public class GameManager : MonoBehaviour {
     private List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
     {
         List<Folder> folders = new List<Folder>();
-        heavenLocked = false;
-        hellLocked = false;
         while (folders.Count < number_folders)
         {
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
@@ -70,9 +83,22 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         DontDestroyOnLoad(this);
+        Reset();
+    }
+
+    public void Reset()
+    {
+        foreach (Folder f in folders)
+            Destroy(f.gameObject);
+        foreach (Folder f in heavenQueue)
+            Destroy(f.gameObject);
+        foreach (Folder f in hellQueue)
+            Destroy(f.gameObject);
         folders = new List<Folder>();
         heavenQueue = new List<Folder>();
         hellQueue = new List<Folder>();
+        heavenLocked = false;
+        hellLocked = false;
         if (level != 7)
         {
             folderCount = 10;
@@ -99,8 +125,8 @@ public class GameManager : MonoBehaviour {
         }
         UpdateIndicators();
     }
-	
-	void Update ()
+
+    void Update ()
     {
         if (folders.Count == 0)
             return;
@@ -121,13 +147,11 @@ public class GameManager : MonoBehaviour {
         {
             heavenLocked = true;
             FindObjectOfType<takeObject>().StopAllCoroutines();
-            GameObject.FindGameObjectWithTag("tray_heaven").GetComponent<Collider>().enabled = false;
         }
         if (relHell <= 0 && !hellLocked)
         {
             hellLocked = true;
             FindObjectOfType<takeObject>().StopAllCoroutines();
-            GameObject.FindGameObjectWithTag("tray_hell").GetComponent<Collider>().enabled = false;
         }
     }
 
@@ -153,9 +177,10 @@ public class GameManager : MonoBehaviour {
             else if (gobj.tag == "tray_hell")
                 AddToQueue(gobj, false);
         }
-        if (folderCount == 0)
+        if (heavenLocked && hellLocked)
         {
-
+            level = (level + 1) % 7;
+            Reset();
         }
     }
 }
