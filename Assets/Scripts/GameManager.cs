@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -11,7 +12,16 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public List<Folder> hellQueue;
 
+    private int folderCount = 10;
+
+    [Range(1, 7)]
+    public int level = 1;
+
     public Folder prefab;
+
+    public Text indicatorHeaven;
+
+    public Text indicatorHell;
 
     private List<Folder> createNewFolders(int number_folders, int max_good_action, int max_bad_actions)
     {
@@ -60,8 +70,17 @@ public class GameManager : MonoBehaviour {
         folders = new List<Folder>();
         heavenQueue = new List<Folder>();
         hellQueue = new List<Folder>();
-        folders.AddRange(createNewFolders(5, 3, 0));
-        folders.AddRange(createNewFolders(5, 0, 3));
+        if (level != 7)
+        {
+            folderCount = 10;
+            folders.AddRange(createNewFolders(folderCount / 2, 3, 0));
+            folders.AddRange(createNewFolders(folderCount / 2, 0, 3));
+        }
+        else
+        {
+            folderCount = 1;
+            folders.AddRange(createNewFolders(folderCount, 0, 1));
+        }
         for (int i = 0; i < folders.Count; i++)
         {
             Folder temp = folders[i];
@@ -75,6 +94,7 @@ public class GameManager : MonoBehaviour {
             folders[i].transform.position += new Vector3(0, (folders.Count - i) / 50f, 0);
             folders[i].UpdateStartPosition();
         }
+        UpdateIndicators();
     }
 	
 	void Update ()
@@ -83,13 +103,26 @@ public class GameManager : MonoBehaviour {
             return;
         Vector3 rotation = Camera.main.transform.eulerAngles;
         if (Mathf.Abs(rotation.y) < 20 || Mathf.Abs(rotation.y) > 340)
-        {
             folders[0].highlighted = true;
-        }
         else
-        {
             folders[0].highlighted = false;
-        }
+    }
+
+    private void UpdateIndicators()
+    {
+        indicatorHeaven.text = "Remaining: " + (folderCount / 2 - heavenQueue.Count);
+        indicatorHell.text = "Remaining: " + (folderCount / 2 - hellQueue.Count);
+    }
+
+    private void AddToQueue(GameObject gobj, bool heaven)
+    {
+        Folder f = folders[0];
+        folders.Remove(f);
+        f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
+        if (heaven)
+            heavenQueue.Add(f);
+        else
+            hellQueue.Add(f);
     }
 
     public void OnSelectTray(takeObject obj)
@@ -98,19 +131,9 @@ public class GameManager : MonoBehaviour {
         if (folders.Count > 0 && (gobj = obj.hovered.gameObject) != null)
         {
             if (gobj.tag == "tray_heaven")
-            {
-                Folder f = folders[0];
-                folders.Remove(f);
-                f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
-                heavenQueue.Add(f);
-            }
+                AddToQueue(gobj, true);
             else if (gobj.tag == "tray_hell")
-            {
-                Folder f = folders[0];
-                folders.Remove(f);
-                f.Slide(gobj.transform.position + new Vector3(-1.1f, .1f - folders.Count / 500f, -1.5f), gobj.transform.eulerAngles + new Vector3(90, 0));
-                hellQueue.Add(f);
-            }
+                AddToQueue(gobj, false);
         }
     }
 }
