@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public float bad_karma_heaven = 0;
     public float good_karma_hell = 0;
     public float good_karma_heaven = 0;
+    public string end_sentence;
     [HideInInspector]
     public List<Folder> folders;
     [HideInInspector]
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    [Range(1, 7)]
+    [Range(1, 3)]
     public int level = 1;
     public Folder prefab;
     public Text indicatorHeaven;
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour {
             folders.AddRange(createNewFolders(1, 2, 0));
             folders.AddRange(createNewFolders(1, 0, 2));
         }
- /*       else if (level == 2)
+        else if (level == 2)
         {
             folderCount = 10;
             maxHeaven = 5;
@@ -140,15 +142,15 @@ public class GameManager : MonoBehaviour {
             folders.AddRange(createNewFolders(1, 2, 0));
             folders.AddRange(createNewFolders(1, 3, 2));
             folders.AddRange(createNewFolders(2, 1, 3));
-        }*/
+        }
         else
         {
-            GameObject.Find("maketransition").GetComponent<maketransition>().gotransit(2);
             folderCount = 1;
             Folder folder = Instantiate(prefab, transform.position, Quaternion.identity);
             folder.createYourFolder(bad_karma_heaven, bad_karma_hell, good_karma_heaven, good_karma_hell);
             folder.gameObject.transform.eulerAngles = prefab.transform.eulerAngles + new Vector3(0, Random.Range(-20, 20));
             folder.avatar.gameObject.transform.eulerAngles = folder.gameObject.transform.eulerAngles + new Vector3(0, 0, Random.Range(-10, 10));
+            folders.Add(folder);
             if (defineIfWin())
             {
                 maxHeaven = 1;
@@ -273,21 +275,37 @@ public class GameManager : MonoBehaviour {
                         good_karma_hell += a.karma;
                 }
             }
-            if (level < 7)
+            print(level);
+            if (level < 3)
                 StartCoroutine(LoadNextLevel());
+            else
+            {
+                StartCoroutine(fade());             
+            }
         }
+    }
+
+    IEnumerator fade()
+    {
+        float time = GameObject.Find("FadingSystem").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(time);
+        if (defineIfWin() == true)
+            end_sentence = "In fact your judgment was quite good !\nWe decided you to send you to the Heaven !\n\nRest in peace.";
+        else
+            end_sentence = "In fact your judgment was unbalanced !\nYou are going to stay in Hell for eternity !\n\nHasta la vista baby";
+        SceneManager.LoadScene(2);
     }
 
     IEnumerator LoadNextLevel()
     {
         yield return new WaitForSeconds(2);
-        level = (level + 1) % 7;
+        level = (level + 1) % 4;
         Reset();
     }
 
     public bool defineIfWin()
     {
-        if ((karma -= 0.3f) > 0)
+        if ((Mathf.Abs(good_karma_heaven) + Mathf.Abs(good_karma_hell)) > (Mathf.Abs(bad_karma_heaven) + Mathf.Abs(bad_karma_hell)))
             return true;
         else
             return false;

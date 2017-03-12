@@ -36,24 +36,17 @@ public class Folder : MonoBehaviour {
         characterName.text = "?????";
         characterSurname.text = "?????";
         actions.Clear();
-        bad_karma_heaven = Math.Abs(bad_karma_heaven);
-        bad_karma_hell = Math.Abs(bad_karma_hell);
-        good_karma_heaven = Math.Abs(good_karma_heaven);
-        good_karma_hell = Math.Abs(good_karma_hell);
-        actions.Add(new Actions.Action(0, "Judged and probably punished good people for bad choices they were forced to make, despite of their feelings"));
-        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_hell / (bad_karma_hell + good_karma_hell) * 100), 1) + "% of the people that this guy sent to hell had a part of goodness in them!"));
-        actions.Add(new Actions.Action(0, Math.Round(Math.Abs(bad_karma_heaven / (good_karma_heaven + bad_karma_heaven) * 100), 1) + "% of the people that this guy sent to heaven had a part of badness in them!"));
+        bad_karma_heaven = Mathf.Abs(bad_karma_heaven);
+        bad_karma_hell = Mathf.Abs(bad_karma_hell);
+        good_karma_heaven = Mathf.Abs(good_karma_heaven);
+        good_karma_hell = Mathf.Abs(good_karma_hell);
+        actions.Add(new Actions.Action(0, "Judged good people for bad choices they were forced to make, despite of their feelings"));
+        actions.Add(new Actions.Action(0, Math.Round(Mathf.Abs(bad_karma_hell / (bad_karma_hell + good_karma_hell) * 100), 1) + "% of the people that this guy sent to hell had a part of goodness in them!"));
+        actions.Add(new Actions.Action(0, Math.Round(Mathf.Abs(bad_karma_heaven / (good_karma_heaven + bad_karma_heaven) * 100), 1) + "% of the people that this guy sent to heaven had a part of badness in them!"));
 
         wasHighlighted = false;
         highlighted = true;
         UpdateStartPosition();
-     //   actions.Clear();
-        actions.Add(new Actions.Action(0, "Did you recognize him? Yes, it is you ! All of this little game was about to test you, and now the judge is gonna be judged !"));
-        if ((good_karma_heaven + good_karma_hell) > (bad_karma_heaven + bad_karma_hell))
-            actions.Add(new Actions.Action(0, "You are lucky, we decided you to send you to Heaven !"));
-        else
-            actions.Add(new Actions.Action(0, "You gonna stay in Hell for the eternity !"));
-
     }
 
     IEnumerator createNewFolder()
